@@ -1,127 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sakar Infra Weighbridge Portal - Login</title>
+    <meta charset="UTF-8">
+    <title>SSO Login</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f2f2f2;
+        }
 
-<style>
-/* Body Styling */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0083ff, #00ffa6);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-}
+        header {
+            background: #0b3c5d;
+            color: white;
+            padding: 15px 30px;
+        }
 
-/* Login Box */
-.box {
-  background: #ffffffee;
-  padding: 40px 30px;
-  border-radius: 20px;
-  width: 350px;
-  text-align: center;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
+        header h2 {
+            margin: 0;
+        }
 
-.box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-}
+        .container {
+            display: flex;
+            padding: 30px;
+        }
 
-.box h2 {
-  margin-bottom: 5px;
-  color: #013369;
-}
+        .left {
+            flex: 2;
+        }
 
-.box h4 {
-  margin-bottom: 25px;
-  color: #555;
-  font-weight: normal;
-}
+        .box {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #1e88e5;
+        }
 
-/* Input Fields */
-input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  transition: border 0.3s, box-shadow 0.3s;
-}
+        .box h3 {
+            margin: 0;
+            color: #1e88e5;
+        }
 
-input:focus {
-  border: 1px solid #0083ff;
-  box-shadow: 0 0 8px rgba(0, 131, 255, 0.4);
-  outline: none;
-}
+        .count {
+            background: #e3f2fd;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
 
-/* Button */
-button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  background: linear-gradient(45deg, #0083ff, #00ffa6);
-  color: white;
-  transition: background 0.3s, transform 0.2s;
-}
+        .right {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            margin-left: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
 
-button:hover {
-  background: linear-gradient(45deg, #00ffa6, #0083ff);
-  transform: translateY(-3px);
-}
+        .right h3 {
+            text-align: center;
+        }
 
-.box p {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #888;
-}
-</style>
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .captcha {
+            font-size: 22px;
+            letter-spacing: 5px;
+            background: #eee;
+            padding: 8px;
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #1e88e5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1565c0;
+        }
+
+        .links {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .links a {
+            color: #1e88e5;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>Rajasthan Single Sign On</h2>
+    <small>One Digital Identity for all Applications</small>
+</header>
+
+<div class="container">
+
+    <!-- LEFT SECTION -->
+    <div class="left">
+        <div class="box">
+            <h3>G2G APPS</h3>
+            <div class="count">375</div>
+        </div>
+
+        <div class="box">
+            <h3>G2C / G2B APPS</h3>
+            <div class="count">239</div>
+        </div>
+
+        <div class="box">
+            <h3>IDENTITIES</h3>
+            <div class="count">32,993,090</div>
+        </div>
+    </div>
+
+    <!-- RIGHT LOGIN -->
+    <div class="right">
+        <h3>Login</h3>
+
+        <input type="text" id="username" placeholder="SSO ID / Username">
+        <input type="password" id="password" placeholder="Password">
+
+        <div class="captcha" id="captchaText"></div>
+        <input type="text" id="captchaInput" placeholder="Enter Captcha">
+
+        <button onclick="login()">Login</button>
+
+        <div class="links">
+            <p><a href="#">I Forgot my Digital Identity (SSOID)</a></p>
+            <p><a href="#">I Forgot my Password</a></p>
+        </div>
+    </div>
+
+</div>
 
 <script>
-function login(){
-  var u = document.getElementById("user").value;
-  var p = document.getElementById("pass").value;
+    let captcha = "";
 
-  if(u=="admin" && p=="12345")
-  if(u=="Sakar" && p=="12345"){
-      localStorage.setItem("loggedIn", "true"); // save login status
-      window.location.href="dashboard.html";   // redirect to dashboard
-  } else {
-      alert("Wrong Username or Password");
-  }
-}
+    function generateCaptcha() {
+        captcha = Math.floor(100000 + Math.random() * 900000);
+        document.getElementById("captchaText").innerText = captcha;
+    }
 
-// Prevent logged-in user from going back to login page
-window.onload = function() {
-  if(localStorage.getItem("loggedIn") === "true"){
-    window.location.href = "dashboard.html";
-  }
-};
+    function login() {
+        let user = document.getElementById("username").value;
+        let pass = document.getElementById("password").value;
+        let cap = document.getElementById("captchaInput").value;
+
+        if (user === "" || pass === "") {
+            alert("Username or Password required");
+            return;
+        }
+
+        if (cap != captcha) {
+            alert("Invalid Captcha");
+            generateCaptcha();
+            return;
+        }
+
+        alert("Login Successful (Demo)");
+    }
+
+    generateCaptcha();
 </script>
-</head>
 
-<body>
-<div class="box">
-  <h2>Login</h2>
-  <h4>Sakar Infra Weighbridge Portal</h4>
-
-  <input id="user" placeholder="Enter Username">
-  <input id="pass" type="password" placeholder="Enter Password">
-
-  <button onclick="login()">Login</button>
-
-  <p>&copy; 2026 Sakar Infra</p>
-</div>
 </body>
 </html>
-
