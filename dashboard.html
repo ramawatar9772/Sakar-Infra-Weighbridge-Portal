@@ -97,6 +97,7 @@ th,td{padding:8px; border:1px solid #ccc; font-size:14px;}
 <button class="green" onclick="playAudio('vajan_sahi')">Vajan Sahi Hai</button>
 <button class="red" onclick="playAudio('galat')">Vajan Galat Hai</button>
 <button class="blue" onclick="playAudio('site_band')">Site Nahi Chal Rahi – Gaadi Piche Karein</button>
+<button class="blue" onclick="playAudio('Gadi_aagelaye')">Gadi_aagelaye– Gadi_aagelaye</button>
 <br>
 <button class="gray" onclick="pauseAudio()">⏸ Pause</button>
 <button class="red" onclick="stopAudio()">⛔ Stop</button>
@@ -131,6 +132,7 @@ th,td{padding:8px; border:1px solid #ccc; font-size:14px;}
 <audio id="vajan_sahi" src="vajan_sahi_age.mp3.mpeg"></audio>
 <audio id="galat" src="galat.mp3.mp3"></audio>
 <audio id="site_band" src="site_nahi_chal_rhi.mp3"></audio>
+<audio id="Gadi_aagelaye" src="Gadi_aagelaye.mp3"></audio>
 
 <script>
 /* ===== LOGIN CHECK ===== */
@@ -158,6 +160,7 @@ document.addEventListener("keydown",function(e){
  if(e.key=="1") playAudio("vajan_sahi");
  if(e.key=="2") playAudio("galat");
  if(e.key=="3") playAudio("site_band");
+ if(e.key=="3") playAudio("Gadi_aagelaye");   
  if(e.key=="0") stopAudio();
 });
 
