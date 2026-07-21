@@ -1,184 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SSO Login</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f2f2f2;
-        }
+function login() {
+    let user = document.getElementById("username").value.trim();
+    let pass = document.getElementById("password").value.trim();
+    let cap = document.getElementById("captchaInput").value;
 
-        header {
-            background: #0b3c5d;
-            color: white;
-            padding: 15px 30px;
-        }
-
-        header h2 {
-            margin: 0;
-        }
-
-        .container {
-            display: flex;
-            padding: 30px;
-        }
-
-        .left {
-            flex: 2;
-        }
-
-        .box {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 5px solid #1e88e5;
-        }
-
-        .box h3 {
-            margin: 0;
-            color: #1e88e5;
-        }
-
-        .count {
-            background: #e3f2fd;
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        .right {
-            flex: 1;
-            background: white;
-            padding: 25px;
-            margin-left: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .right h3 {
-            text-align: center;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-        .captcha {
-            font-size: 22px;
-            letter-spacing: 5px;
-            background: #eee;
-            padding: 8px;
-            text-align: center;
-            margin: 10px 0;
-            font-weight: bold;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #1e88e5;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background: #1565c0;
-        }
-
-        .links {
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
-        .links a {
-            color: #1e88e5;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <h2>Rajasthan Single Sign On</h2>
-    <small>One Digital Identity for all Applications</small>
-</header>
-
-<div class="container">
-
-    <!-- LEFT SECTION -->
-    <div class="left">
-        <div class="box">
-            <h3>G2G APPS</h3>
-            <div class="count">375</div>
-        </div>
-
-        <div class="box">
-            <h3>G2C / G2B APPS</h3>
-            <div class="count">239</div>
-        </div>
-
-        <div class="box">
-            <h3>IDENTITIES</h3>
-            <div class="count">32,993,090</div>
-        </div>
-    </div>
-
-    <!-- RIGHT LOGIN -->
-    <div class="right">
-        <h3>Login</h3>
-
-        <input type="text" id="username" placeholder="SSO ID / Username">
-        <input type="password" id="password" placeholder="Password">
-
-        <div class="captcha" id="captchaText"></div>
-        <input type="text" id="captchaInput" placeholder="Enter Captcha">
-
-        <button onclick="login()">Login</button>
-
-        <div class="links">
-            <p><a href="#">I Forgot my Digital Identity (SSOID)</a></p>
-            <p><a href="#">I Forgot my Password</a></p>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    let captcha = "";
-
-    function generateCaptcha() {
-        captcha = Math.floor(100000 + Math.random() * 900000);
-        document.getElementById("captchaText").innerText = captcha;
+    if (user === "" || pass === "") {
+        alert("Username or Password required");
+        return;
     }
 
-    function login() {
-        let user = document.getElementById("username").value;
-        let pass = document.getElementById("password").value;
-        let cap = document.getElementById("captchaInput").value;
+    if (Number(cap) !== captcha) {
+        alert("Invalid Captcha");
+        generateCaptcha();
+        return;
+    }
 
-        if (user === "" || pass === "") {
-            alert("Username or Password required");
-            return;
-        }
+    const validUser = "admin";
+    const validPass = "123456";
 
-        if (cap != captcha) {
-            alert("Invalid Captcha");
-            generateCaptcha();
-            return;
-        }
-
-        alert("Login Successful (Demo)");
+    if (user === validUser && pass === validPass) {
+        alert("Login Successful");
+    } else {
+        alert("Invalid Username or Password");
     }
 
     generateCaptcha();
-</script>
-
-</body>
-</html>
+}
